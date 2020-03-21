@@ -37,21 +37,21 @@
 // }
 const STORAGE = 'mall'
 export default {
-  setItem (key, value, module) {
+  setItem (key, value, moduleName) {
     const val = this.getStorage()
-    if (module) {
-      const val = this.getItem(module)
+    if (moduleName) {
+      const val = this.getItem(moduleName)
       val[key] = value
-      this.setItem(module, val)
+      this.setItem(moduleName, val)
     } else {
       val[key] = value
       window.sessionStorage.setItem(STORAGE, JSON.stringify(val))
     }
   },
-  getItem (key, module) {
+  getItem (key, moduleName) {
     const val = this.getStorage()
-    if (module) {
-      const val = this.getItem(module)
+    if (moduleName) {
+      const val = this.getItem(moduleName)
       return val[key]
     }
     return val[key]
@@ -59,11 +59,11 @@ export default {
   getStorage () {
     return JSON.parse(window.sessionStorage.getItem(STORAGE) || '{}')
   },
-  clear (key, module) {
+  clear (key, moduleName) {
     const val = this.getStorage()
-    if (module) {
-      if (!val[module]) return
-      delete val[module][key]
+    if (moduleName) {
+      if (!val[moduleName]) return // 为了增加健壮性
+      delete val[moduleName][key]
     } else {
       delete val[key]
     }

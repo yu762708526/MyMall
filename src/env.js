@@ -1,5 +1,6 @@
+// CORS或jsonp下  代理不用！！！
 let baseURL
-switch (process.env.NODE_ENV) {
+switch (process.env.NODE_ENV) { // process.env获取node.js进程的环境变量
   case 'development':
     baseURL = 'http://dev-mall-pre.springboot.cn/api'
     break
