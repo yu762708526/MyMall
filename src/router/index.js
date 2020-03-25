@@ -10,6 +10,8 @@ import OrderComfirm from '../pages/orderComfirm'
 import OrderList from '../pages/orderList'
 import OrderPay from '../pages/orderPay'
 import Alipay from '../pages/alipay.vue'
+import Login from '../pages/login.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,6 +27,7 @@ const routes = [
     ]
   },
   { path: '/cart', name: 'cart', component: Cart },
+  { path: '/login', name: 'login', component: Login },
   {
     path: '/order',
     name: 'order',

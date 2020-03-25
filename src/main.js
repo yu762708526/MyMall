@@ -4,7 +4,10 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import './assets/scss/base.scss'
+import './assets/scss/reset.scss'
+import 'swiper/dist/css/swiper.css'
 const mock = false // 给mock加个开关 不需要模拟就关掉
 if (mock) {
   require('./mock/api')
@@ -28,6 +31,7 @@ axios.interceptors.response.use(function (response) {
 })
 
 Vue.use(VueAxios, axios)
+Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
 new Vue({
