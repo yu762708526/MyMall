@@ -5,6 +5,9 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueLazyload from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
+import './element/element'
 import './assets/scss/base.scss'
 import './assets/scss/reset.scss'
 import 'swiper/dist/css/swiper.css'
@@ -21,17 +24,29 @@ axios.defaults.timeout = 8000
 // 接口错误拦截
 axios.interceptors.response.use(function (response) {
   const res = response.data // response.data为接口返回的值
-  if (res.status === 0) { // 登录成功时
+  const path = location.hash
+  if (res.status == 0) { // 登录成功时
     return res.data
-  } else if (res.status === 10) { // 没有登陆时
-    window.location.href = '/#/login'
+  } else if (res.status == 10) { // 没有登陆时
+    if (path !== '#/index') {
+      window.location.href = '/#/login'
+    }
+    return Promise.reject(res)
   } else {
     alert(res.msg)
+    return Promise.reject(res)
   }
 })
 
 Vue.use(VueAxios, axios)
+Vue.use(VueCookie)
 Vue.use(VueAwesomeSwiper)
+// 图片懒加载
+Vue.use(VueLazyload, {
+  loading: '/imgs/loading-svg/loading-bars.svg'
+})
+// cookie
+
 Vue.config.productionTip = false
 
 new Vue({

@@ -12,6 +12,10 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    //自定义配置
+    eqeqeq: 'off', // 不能始用==
+    'no-unused-vars': 'off', // 消除未使用的变量
+    'no-undef': 'off', // 未使用变量报错
   }
 }

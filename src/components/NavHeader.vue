@@ -11,9 +11,9 @@
           </div>
           <div class="header-top-user">
             <a href="javascript:;" v-if="username">{{username}}</a>
-            <a href="javascript:;" v-if="!username" @click="login">登录</a>
+            <a href="/#/login" v-if="!username" @click="login">登录</a>
             <a href="javascript:;" v-if="username">我的订单</a>
-            <a href="javascript:;" class="cart" @click="toCart"><span class="icon-cart"></span>购物车</a>
+            <a href="javascript:;" class="cart" @click="toCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
                   <li class="product" v-for="(item, index) in phoneList" :key="index">
                     <a :href="'/#/product/'+item.id" target="_blank">
                       <div class="pro-img">
-                        <img :src="item.mainImage" :alt="item.subtitle">
+                        <img v-lazy="item.mainImage" :alt="item.subtitle">
                       </div>
                       <div class="pro-name">
                         {{item.name}}
@@ -52,7 +52,7 @@
                   <li class="product">
                     <a href="javascript:;" target="_blank">
                       <div class="pro-img">
-                        <img src="/imgs/nav-img/nav-3-1.jpg" alt="">
+                        <img v-lazy="'/imgs/nav-img/nav-3-1.jpg'" alt="">
                       </div>
                       <div class="pro-name">
                         小米壁画电视 65英寸
@@ -65,7 +65,7 @@
                   <li class="product">
                     <a href="javascript:;" target="_blank">
                       <div class="pro-img">
-                        <img src="/imgs/nav-img/nav-3-2.jpg" alt="">
+                        <img v-lazy="'/imgs/nav-img/nav-3-2.jpg'" alt="">
                       </div>
                       <div class="pro-name">
                         小米全面屏电视
@@ -78,7 +78,7 @@
                   <li class="product">
                     <a href="javascript:;" target="_blank">
                       <div class="pro-img">
-                        <img src="/imgs/nav-img/nav-3-3.png" alt="">
+                        <img v-lazy="'/imgs/nav-img/nav-3-3.png'" alt="">
                       </div>
                       <div class="pro-name">
                         小米电视4A 32寸
@@ -91,7 +91,7 @@
                   <li class="product">
                     <a href="javascript:;" target="_blank">
                       <div class="pro-img">
-                        <img src="/imgs/nav-img/nav-3-4.jpg" alt="">
+                        <img v-lazy="'/imgs/nav-img/nav-3-4.jpg'" alt="">
                       </div>
                       <div class="pro-name">
                         小米电视4A 55寸
@@ -104,7 +104,7 @@
                   <li class="product">
                     <a href="javascript:;" target="_blank">
                       <div class="pro-img">
-                        <img src="/imgs/nav-img/nav-3-5.jpg" alt="">
+                        <img v-lazy="'/imgs/nav-img/nav-3-5.jpg'" alt="">
                       </div>
                       <div class="pro-name">
                         小米电视4A 65寸
@@ -117,7 +117,7 @@
                   <li class="product">
                     <a href="javascript:;" target="_blank">
                       <div class="pro-img">
-                        <img src="/imgs/nav-img/nav-3-6.png" alt="">
+                        <img v-lazy="'/imgs/nav-img/nav-3-6.png'" alt="">
                       </div>
                       <div class="pro-name">
                         小米全面屏电视
@@ -134,7 +134,7 @@
           <div class="header-bot-search">
             <div class="wrapper">
               <input type="text">
-              <a href="javascript"></a>
+              <a href="javascript:;"></a>
             </div>
           </div>
         </div>
@@ -147,8 +147,17 @@ export default {
   name: 'nav-header',
   data () {
     return {
-      username: 'jack',
+      // username:''
       phoneList: []
+    }
+  },
+  computed: {
+    // 解决Vuex延迟的问题
+    username () {
+      return this.$store.state.username
+    },
+    cartCount () {
+      return this.$store.state.cartCount
     }
   },
   filters: {
